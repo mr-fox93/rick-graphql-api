@@ -3,4 +3,8 @@ export interface Character {
   name: string;
   species: string;
   image: string;
+  gender: string;
+  location: {
+    name: string;
+  };
 }
