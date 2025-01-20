@@ -19,6 +19,11 @@ export const GET_CHARACTERS = gql`
         location {
           name
         }
+        episode {
+          id
+          name
+          episode
+        }
       }
     }
   }

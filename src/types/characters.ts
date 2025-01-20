@@ -7,4 +7,11 @@ export interface Character {
   location: {
     name: string;
   };
+  episode: [
+    {
+      id: string;
+      name: string;
+      episode: string;
+    }
+  ];
 }
