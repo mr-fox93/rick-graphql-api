@@ -77,34 +77,118 @@
 //   return { triggerDebounce, isReady };
 // };
 
-import { useState, useEffect, useCallback } from "react";
+// import { useState, useEffect, useCallback } from "react";
 
-export const useDebounce = <T>(
+// export const useDebounce = <T>(
+//   callback: () => void,
+//   delay: number,
+//   dependencies: T[]
+// ): { triggerDebounce: () => void; isReady: boolean } => {
+//   const [isReady, setIsReady] = useState<boolean>(true);
+//   const [timer, setTimer] = useState<number | null>(null);
+
+//   const triggerDebounce = useCallback(() => {
+//     if (isReady) {
+//       setIsReady(false);
+//       if (timer) clearTimeout(timer);
+//       setTimer(
+//         window.setTimeout(() => {
+//           callback();
+//           setIsReady(true);
+//         }, delay)
+//       );
+//     }
+//   }, [callback, delay, isReady, timer]);
+
+//   useEffect(() => {
+//     return () => {
+//       if (timer) clearTimeout(timer);
+//     };
+//   }, [timer, ...dependencies]);
+
+//   return { triggerDebounce, isReady };
+// };
+
+//on top working my, bellow chat gpt
+
+// import { useEffect, useRef, useState } from "react";
+
+// interface UseDebounceReturn {
+//   isReady: boolean;
+//   cancel: () => void;
+// }
+
+// function useDebounce<T>(
+//   callback: () => void,
+//   delay: number,
+//   dependencyList: T[]
+// ): UseDebounceReturn {
+//   const [isReady, setIsReady] = useState<boolean>(true);
+//   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
+
+//   const cancel = (): void => {
+//     if (timeoutRef.current) {
+//       clearTimeout(timeoutRef.current);
+//       timeoutRef.current = null;
+//       setIsReady(true);
+//     }
+//   };
+
+//   useEffect(() => {
+//     setIsReady(false);
+//     cancel();
+
+//     timeoutRef.current = setTimeout(() => {
+//       callback();
+//       setIsReady(true);
+//     }, delay);
+
+//     return () => cancel();
+//   }, dependencyList);
+
+//   return { isReady, cancel };
+// }
+
+// export default useDebounce;
+
+//
+
+import { useEffect, useRef, useState } from "react";
+
+interface UseDebounceReturn {
+  isReady: boolean;
+  cancel: () => void;
+}
+
+function useDebounce<T>(
   callback: () => void,
   delay: number,
   dependencies: T[]
-): { triggerDebounce: () => void; isReady: boolean } => {
-  const [isReady, setIsReady] = useState<boolean>(true);
-  const [timer, setTimer] = useState<number | null>(null);
+): UseDebounceReturn {
+  const [isReady, setIsReady] = useState(true);
+  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
-  const triggerDebounce = useCallback(() => {
-    if (isReady) {
-      setIsReady(false);
-      if (timer) clearTimeout(timer);
-      setTimer(
-        window.setTimeout(() => {
-          callback();
-          setIsReady(true);
-        }, delay)
-      );
+  const cancel = () => {
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+      timeoutRef.current = null;
+      setIsReady(true);
     }
-  }, [callback, delay, isReady, timer]);
+  };
 
   useEffect(() => {
-    return () => {
-      if (timer) clearTimeout(timer);
-    };
-  }, [timer, ...dependencies]);
+    setIsReady(false);
+    cancel();
 
-  return { triggerDebounce, isReady };
-};
+    timeoutRef.current = setTimeout(() => {
+      callback();
+      setIsReady(true);
+    }, delay);
+
+    return () => cancel();
+  }, dependencies);
+
+  return { isReady, cancel };
+}
+
+export default useDebounce;
