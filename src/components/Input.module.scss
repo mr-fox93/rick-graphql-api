@@ -1,0 +1,22 @@
+.input {
+  font-family: "Bangers", cursive;
+
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
+  border-radius: 8px;
+  color: #333;
+  background-color: #fff0f5;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  outline: none;
+  transition: box-shadow 0.3s ease, border-color 0.3s ease;
+
+  &:focus {
+    border-color: #f47364;
+    box-shadow: 0 0 0 2px rgba(244, 115, 100, 0.5);
+  }
+
+  &:hover {
+    background-color: #ffeef0;
+  }
+}
