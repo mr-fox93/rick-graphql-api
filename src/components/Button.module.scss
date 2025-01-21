@@ -1,0 +1,25 @@
+.button {
+  font-family: "Bangers", cursive;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: 500;
+  color: #fff;
+  background-color: #f47364;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  outline: none;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  display: inline-block;
+  text-align: center;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+
+  &:hover {
+    background-color: #f58d85;
+  }
+
+  &:active {
+    transform: scale(0.95);
+  }
+}

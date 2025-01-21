@@ -41,12 +41,31 @@ export const SEARCH_CHARACTERS = gql`
         location {
           name
         }
-        #     episode {
-        #       id
-        #       name
-        #       air_date
-        #       episode
-        #     }
+        episode {
+          id
+          name
+          air_date
+          episode
+        }
+      }
+    }
+  }
+`;
+
+export const GET_CHARACTER_DETAILS = gql`
+  query GetCharacterDetails($id: ID!) {
+    character(id: $id) {
+      id
+      name
+      image
+      species
+      location {
+        name
+      }
+      episode {
+        id
+        name
+        episode
       }
     }
   }

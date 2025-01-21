@@ -1,0 +1,60 @@
+.details {
+  padding: 20px;
+  text-align: center;
+}
+
+.backButton {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #f47364;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #f58d85;
+  }
+}
+
+.characterImage {
+  width: 200px;
+  height: auto;
+  border-radius: 10px;
+  margin: 20px 0;
+}
+
+.episodeTable {
+  margin: auto;
+  width: 80%;
+  border-collapse: collapse;
+
+  th,
+  td {
+    padding: 8px;
+    border: 1px solid #ddd;
+    text-align: left;
+  }
+
+  th {
+    background-color: #fde8e9;
+  }
+}
+
+@media (max-width: 768px) {
+  .details {
+    padding: 10px;
+  }
+
+  .backButton {
+    font-size: 14px;
+    padding: 8px 16px;
+  }
+
+  .episodeTable {
+    width: 100%;
+  }
+}
